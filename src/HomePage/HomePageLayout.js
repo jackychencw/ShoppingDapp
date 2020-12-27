@@ -1,107 +1,151 @@
-import { Layout, Menu, Breadcrumb } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined, MenuOutlined } from '@ant-design/icons';
-import React from "react";
+import { Layout, Menu, Affix, Button, Badge, Dropdown, Table, List, Avatar, InputNumber } from 'antd';
+import { MenuOutlined, ShoppingCartOutlined, MinusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
 import './HomePageLayout.css';
 import 'antd/dist/antd.css';
 import logo from './images/logo.png';
-
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import AirPurifierPage from '../ItemPage/Appliances/AirPurifiersPage/index.js';
 
 const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
-
+const { Header, Content, Footer } = Layout;
 
 class HomePageLayout extends React.Component {
+  itemCount = +localStorage.getItem("itemCount") || 0;
+  itemInCart = JSON.parse(localStorage.getItem("itemInCart") || "{}");
+  total = +localStorage.getItem("total") || 0
+
+  state = { itemCount: this.itemCount, itemInCart: this.itemInCart, total: this.total }
+
+  updateTotal = (itemInCart) => {
+    var total = 0
+    itemInCart.forEach(item => {
+      total += item.price * item.amount
+    })
+    localStorage.setItem("total", total);
+    this.setState({ total: total })
+  }
+
+  handleAddItem = (newItemCount, newItemInCart) => {
+    this.setState({ itemCount: newItemCount, itemInCart: newItemInCart });
+    this.updateTotal(newItemInCart)
+  }
+
+  remove = (item) => {
+    const itemCount = +localStorage.getItem("itemCount") || 0;
+    var itemInCart = JSON.parse(localStorage.getItem("itemInCart") || "[]");
+
+
+    const itemIndex = itemInCart.findIndex(function (e) {
+      return e.id === item.id
+    })
+
+    if (itemIndex >= 0) {
+      var newItemCount = itemCount - item.amount
+      itemInCart.splice(itemIndex, 1)
+      localStorage.setItem("itemCount", newItemCount);
+      localStorage.setItem("itemInCart", JSON.stringify(itemInCart));
+      this.setState({ itemCount: newItemCount, itemInCart: itemInCart });
+      this.updateTotal(itemInCart)
+    }
+
+    
+  }
+
+  onChange(value, item) {
+    if (value == 0) {
+      this.remove(item)
+    } else {
+      const itemCount = +localStorage.getItem("itemCount") || 0;
+      var itemInCart = JSON.parse(localStorage.getItem("itemInCart") || "[]");
+
+      const itemIndex = itemInCart.findIndex(function (e) {
+        return e.id === item.id
+      })
+
+      if (itemIndex >= 0) {
+        var newItemCount = itemCount + value - item.amount
+        itemInCart[itemIndex]["amount"] = value
+        this.updateTotal(itemInCart)
+        localStorage.setItem("itemCount", newItemCount);
+        localStorage.setItem("itemInCart", JSON.stringify(itemInCart));
+        this.setState({ itemCount: newItemCount, itemInCart: itemInCart });
+      }
+    }
+
+    
+  }
+
   render() {
     return (
       <Layout>
-        <Header className="header">
-          <img className="logo" src={logo} alt="logo" />
-          <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-            <SubMenu key="Categories" icon={<MenuOutlined />} title="Categories">
-              {/* Appliances */}
-              <SubMenu key="appliances" title="Appliances">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </SubMenu>
-              {/* Computers, Tablets & Accessories */}
-              <SubMenu key="cta" title="Computers, Tablets & Accessories">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </SubMenu>
-              {/* Cell Phones */}
-              <SubMenu key="cellphones" title="Cell Phones">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </SubMenu>
-              {/* Cameras, Camcorders & Drones */}
-              <SubMenu key="ccd" title="Cameras, Camcorders & Drones">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </SubMenu>
-              {/* Musical Instruments */}
-              <SubMenu key="mi" title="Musical Instruments">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </SubMenu>
-              {/* TV & Home Theatre */}
-              <SubMenu key="tht" title="TV & Home Theatre">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </SubMenu>
-              {/* Video Games & Movies */}
-              <SubMenu key="vgm" title="Video Games & Movies">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </SubMenu>
-              {/* Wearable Tech, Health & Fitness */}
-              <SubMenu key="wthf" title="Wearable Tech, Health & Fitness">
-                <Menu.Item key="setting:1">Option 1</Menu.Item>
-                <Menu.Item key="setting:2">Option 2</Menu.Item>
-              </SubMenu>
-            </SubMenu>
-            {/* <Menu.Item key="2">nav 2</Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item> */}
-          </Menu>
-        </Header>
-        <Content style={{ padding: '0 50px' }}>
-          <Breadcrumb style={{ margin: '16px 0' }}>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
-          </Breadcrumb>
-          <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
-            <Sider className="site-layout-background" width={200}>
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={['1']}
-                defaultOpenKeys={['sub1']}
-                style={{ height: '100%' }}
-              >
-                <SubMenu key="sub1" icon={<UserOutlined />} title="subnav 1">
-                  <Menu.Item key="1">option1</Menu.Item>
-                  <Menu.Item key="2">option2</Menu.Item>
-                  <Menu.Item key="3">option3</Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
+        <Router>
+          <Header className="header">
+            <img className="logo" src={logo} alt="logo" />
+            <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+              <SubMenu key="Categories" icon={<MenuOutlined />} title="Categories">
+                {/* Appliances */}
+                <SubMenu key="appliances" title="Appliances">
+                  <Menu.Item key="rf">Refrigerators & Freezers</Menu.Item>
+                  <Menu.Item key="cem">Coffee & Espresso Makers</Menu.Item>
+                  <Menu.Item key="ap">
+                    <Link to="air-purifiers">Air Purifiers</Link>
+                  </Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub2" icon={<LaptopOutlined />} title="subnav 2">
-                  <Menu.Item key="5">option5</Menu.Item>
-                  <Menu.Item key="6">option6</Menu.Item>
-                  <Menu.Item key="7">option7</Menu.Item>
-                  <Menu.Item key="8">option8</Menu.Item>
+                {/* Computers, Tablets & Accessories */}
+                <SubMenu key="cta" title="Computers, Tablets & Accessories">
+                  <Menu.Item key="td">Laptops and Desktops</Menu.Item>
+                  <Menu.Item key="tie">Tablets, iPads & eReaders</Menu.Item>
                 </SubMenu>
-                <SubMenu key="sub3" icon={<NotificationOutlined />} title="subnav 3">
-                  <Menu.Item key="9">option9</Menu.Item>
-                  <Menu.Item key="10">option10</Menu.Item>
-                  <Menu.Item key="11">option11</Menu.Item>
-                  <Menu.Item key="12">option12</Menu.Item>
+                {/* Cell Phones */}
+                <SubMenu key="cellphones" title="Cell Phones">
+                  <Menu.Item key="iphones">iPhones</Menu.Item>
+                  <Menu.Item key="sp">Samsung Phones</Menu.Item>
+                  <Menu.Item key="gp">Google Phones</Menu.Item>
                 </SubMenu>
-              </Menu>
-            </Sider>
-            <Content style={{ padding: '0 24px', minHeight: 280 }}>Content</Content>
-          </Layout>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-      </Layout>
+              </SubMenu>
+              <Menu.Item key="2" style={{ float: 'right' }} icon={<ShoppingCartOutlined />}></Menu.Item>
+            </Menu>
+          </Header>
+          <Content style={{ padding: '0 50px' }}>
+            <Affix style={{ position: 'absolute', bottom: 45, right: 45 }}>
+              <Badge count={this.state.itemCount}>
+                <Dropdown style={{ width: 120 }} overlay={
+                  <div>
+                  <List
+                    itemLayout="horizontal"
+                    dataSource={this.state.itemInCart}
+                    renderItem={item => (
+                      <List.Item
+                        actions={[<CloseCircleOutlined onClick={() => this.remove(item)} />]}
+                      >
+                        <List.Item.Meta
+                          avatar={<Avatar src={item.picture} />}
+                          title={<a href="https://ant.design">{item.name}</a>}
+                          // description={"amount:" + item.amount + " price: $" + Math.round(item.price * item.amount, 4)}
+                          description={<InputNumber defaultValue={item.amount} onChange={(value) => this.onChange(value, item)} />}
+                        />
+                        <div>Price: {item.price * item.amount}</div>
+                      </List.Item>
+                    )}
+                  />
+                  <div style={{ float: 'right' }}>total: ${this.state.total}</div>
+                  </div>
+                  } placement="topRight">
+
+                  <div style={{ width: 420 }}>
+                    <Button style={{ float: 'right' }} size="large" icon={<ShoppingCartOutlined />} type="primary" >
+                      Shopping Cart
+                      </Button>
+                  </div>
+                </Dropdown>
+              </Badge>
+            </Affix>
+            <Route path="/air-purifiers"><AirPurifierPage onAddItem={this.handleAddItem}></AirPurifierPage></Route>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>Ethershop</Footer>
+        </Router>
+      </Layout >
     )
   }
 }
