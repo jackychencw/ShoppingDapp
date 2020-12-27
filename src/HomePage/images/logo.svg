@@ -1,0 +1,18 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="#fff" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <rect stroke="#0f0f00" id="svg_9" height="190.99999" width="494" y="198.45313" x="157.50002" stroke-width="1.5" fill="#000000"/>
+  <rect stroke="#000" id="svg_10" height="185.99998" width="490.00005" y="200.45313" x="159.5" stroke-width="1.5" fill="#efe7e6"/>
+  <rect stroke="#000" id="svg_7" height="160.99999" width="461.99999" y="213.45314" x="173.50001" stroke-width="11.5" fill="#efe7e6"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Georgia, Times, 'Times New Roman', serif" font-size="84" id="svg_1" y="319.45313" x="199.63411" stroke-width="0" stroke="#000" fill="#000000">E</text>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="Georgia, Times, 'Times New Roman', serif" font-size="57" id="svg_2" y="318.45313" x="259.5" stroke-width="0" stroke="#000" fill="#000000">THERSHOP</text>
+ </g>
+</svg>
