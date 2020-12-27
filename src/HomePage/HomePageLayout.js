@@ -1,6 +1,6 @@
-import { Layout, Menu, Affix, Button, Badge, Dropdown, Table, List, Avatar, InputNumber } from 'antd';
-import { MenuOutlined, ShoppingCartOutlined, MinusCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import React, { useState } from "react";
+import { Layout, Menu, Affix, Button, Badge, Dropdown, List, Avatar, InputNumber } from 'antd';
+import { MenuOutlined, ShoppingCartOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import React from "react";
 import './HomePageLayout.css';
 import 'antd/dist/antd.css';
 import logo from './images/logo.png';
@@ -53,7 +53,7 @@ class HomePageLayout extends React.Component {
   }
 
   onChange(value, item) {
-    if (value == 0) {
+    if (value === 0) {
       this.remove(item)
     } else {
       const itemCount = +localStorage.getItem("itemCount") || 0;
@@ -123,7 +123,7 @@ class HomePageLayout extends React.Component {
                           avatar={<Avatar src={item.picture} />}
                           title={<a href="https://ant.design">{item.name}</a>}
                           // description={"amount:" + item.amount + " price: $" + Math.round(item.price * item.amount, 4)}
-                          description={<InputNumber defaultValue={item.amount} onChange={(value) => this.onChange(value, item)} />}
+                          description={<InputNumber value={item.amount} onChange={(value) => this.onChange(value, item)} />}
                         />
                         <div>Price: {item.price * item.amount}</div>
                       </List.Item>
