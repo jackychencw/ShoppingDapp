@@ -1,38 +1,213 @@
 [
     {
       "id": 0,
-      "class": "appliances/air-purifiers",
+      "class": "Appliances",
+      "subclass": "Air Purifiers",
       "name": "Pure Air Purifier",
       "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/146/14664/14664658.jpg",
       "price": 899.99
     },
     {
       "id": 1,
-      "class": "appliances/air-purifiers",
+      "class": "Appliances",
+      "subclass": "Air Purifiers",
       "name": "Hot+Cool Air Purifier",
       "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/133/13331/13331571.jpg",
       "price": 699.99
     },
     {
       "id": 2,
-      "class": "appliances/air-purifiers",
+      "class": "Appliances",
+      "subclass": "Air Purifiers",
       "name": "Cool Link Purifier",
       "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/104/10417/10417060.jpg",
       "price": 349.99
     },
     {
       "id": 3,
-      "class": "appliances/air-purifiers",
+      "class": "Appliances",
+      "subclass": "Air Purifiers",
       "name": "JS FLO 2.0",
       "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/149/14967/14967899.jpg",
       "price": 129.99
     },
     {
       "id": 4,
-      "class": "appliances/air-purifiers",
+      "class": "Appliances",
+      "subclass": "Air Purifiers",
       "name": "GermGuardian 4-in-1",
       "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/146/14636/14636677.jpg",
       "price": 129.99
     }
+    ,
+    {
+      "id": 5,
+      "class": "Computers and Tablet Accessories",
+      "subclass": "Laptops and Desktops",
+      "name": "Apple MacBook air 13.3",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/146/14627/14627724.jpg",
+      "price": 1329.99
+    }
+    ,
+    {
+      "id": 6,
+      "class": "Computers and Tablet Accessories",
+      "subclass": "Tablets, iPads and eReaders",
+      "name": "Apple iPad 10.2",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/149/14961/14961798.jpg",
+      "price": 549.99
+    }
+    ,
+    {
+      "id": 7,
+      "class": "Cell Phones",
+      "subclass": "iPhones",
+      "name": "Apple iPhone 8 64GB",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/135/13527/13527671.jpg",
+      "price": 129.99
+    }
+    ,
+    {
+      "id": 8,
+      "class": "Cell Phones",
+      "subclass": "Samsung Phones",
+      "name": "Samsung Galaxy A11 32GB",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/147/14789/14789828.jpg",
+      "price": 209.99
+    }
+    ,
+    {
+      "id": 9,
+      "class": "Cell Phones",
+      "subclass": "Google Phones",
+      "name": "Google Pixel 4a 128GB",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/148/14878/14878808.jpg",
+      "price": 479.99
+    },
+    {
+      "id": 10,
+      "class": "Appliances",
+      "subclass": "Coffee & Espresso Makers",
+      "name": "GermGuardian 4-in-1",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/146/14636/14636677.jpg",
+      "price": 129.99
+    },
+    {
+      "id": 11,
+      "class": "Appliances",
+      "subclass": "Refrigerators & freezers",
+      "name": "Whirlpool Bottom Freezer",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/103/10395/10395453.jpg",
+      "price": 1249.99
+    },
+    {
+      "id": 12,
+      "class": "Appliances",
+      "subclass": "Refrigerators & freezers",
+      "name": "Insignia Bottom Refrigerator",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/135/13558/13558674.jpg",
+      "price": 899.99
+    }
+    ,
+    {
+      "id": 13,
+      "class": "Appliances",
+      "subclass": "Refrigerators & freezers",
+      "name": "Insignia Bottom Freezer",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/124/12487/12487558.jpg",
+      "price": 849.99
+    }
+    ,
+    {
+      "id": 14,
+      "class": "Appliances",
+      "subclass": "Refrigerators & freezers",
+      "name": "Insignia Bottom Freezer (Only at ehtershop)",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/135/13558/13558673.jpg",
+      "price": 999.99
+    }
+    ,
+    {
+      "id": 15,
+      "class": "Appliances",
+      "subclass": "Refrigerators & freezers",
+      "name": "LG Bottom Freezer",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/104/10416/10416143.jpg",
+      "price": 1399.99
+    },
+    {
+      "id": 16,
+      "class": "Appliances",
+      "subclass": "Coffee & Espresso Makers",
+      "name": "Breville Grind Coffee Maker",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/103/10373/10373209.jpg",
+      "price": 299.99
+    },
+    {
+      "id": 17,
+      "class": "Appliances",
+      "subclass": "Coffee & Espresso Makers",
+      "name": "Keurig K Coffee Maker",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/147/14769/14769526.jpg",
+      "price": 128.99
+    },
+    {
+      "id": 18,
+      "class": "Appliances",
+      "subclass": "Coffee & Espresso Makers",
+      "name": "Keurig K-Elite Coffee Maker",
+      "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/147/14772/14772992.jpg",
+      "price": 299.99
+    },
+    {
+        "id": 19,
+        "class": "Computers and Tablet Accessories",
+        "subclass": "Laptops and Desktops",
+        "name": "Apple MacBook Pro 13.3",
+        "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/146/14627/14627724.jpg",
+        "price": 1529.99
+      }
+      ,
+    {
+        "id": 20,
+        "class": "Computers and Tablet Accessories",
+        "subclass": "Laptops and Desktops",
+        "name": "Apple MacBook air 13.3",
+        "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/145/14517/14517651.jpg",
+        "price": 1229.99
+      },
+      {
+        "id": 21,
+        "class": "Computers and Tablet Accessories",
+        "subclass": "Tablets, iPads and eReaders",
+        "name": "Apple iPad 10.2 with wifi",
+        "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/138/13893/13893721.jpg",
+        "price": 719.99
+      },
+      {
+        "id": 22,
+        "class": "Cell Phones",
+        "subclass": "iPhones",
+        "name": "Apple iPhone 7 32GB",
+        "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/135/13506/13506827.jpg",
+        "price": 229.99
+      },
+      {
+        "id": 23,
+        "class": "Cell Phones",
+        "subclass": "iPhones",
+        "name": "Apple iPhone 7 32GB",
+        "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/135/13506/13506813.jpg",
+        "price": 229.99
+      },
+      {
+        "id": 23,
+        "class": "Cell Phones",
+        "subclass": "iPhones",
+        "name": "Apple iPhone 12 128GB",
+        "picture": "https://multimedia.bbycastatic.ca/multimedia/products/500x500/149/14926/14926637.jpg",
+        "price": 1329.99
+      }
+     
   ]
   

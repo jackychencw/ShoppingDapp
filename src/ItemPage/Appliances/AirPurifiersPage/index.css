@@ -1,7 +1,0 @@
-.description { 
-    text-overflow: ellipsis;
-    overflow: hidden;
-    height: 160px; 
-    height: 1.2em; 
-    white-space: nowrap;
-  }
