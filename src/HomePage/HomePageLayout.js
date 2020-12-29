@@ -1,14 +1,29 @@
-import { Layout, Menu, Button, Badge, List, Avatar, InputNumber, Modal } from 'antd';
-import { MenuOutlined, ShoppingCartOutlined, CloseCircleOutlined, DollarCircleOutlined } from '@ant-design/icons';
 import React from "react";
+import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+
+import { Layout, Menu, Button, Badge, List, Avatar, InputNumber, Modal } from 'antd';
+import {
+  MenuOutlined,
+  ShoppingCartOutlined,
+  CloseCircleOutlined,
+  DollarCircleOutlined,
+  UserOutlined
+} from '@ant-design/icons';
+
+import AirPurifierPage from '../ItemPage/Appliances/AirPurifiersPage/index.js';
+import LandingPage from '../LandingPage/LandingPage.js'
+import OrderPage from '../OrderPage/OrderPage.js';
+
+import Web3 from 'web3'
+import Shop from '../abis/Shop.json'
+
 import './HomePageLayout.css';
 import 'antd/dist/antd.css';
 import logo from './images/logo.png';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import AirPurifierPage from '../ItemPage/Appliances/AirPurifiersPage/index.js';
-import LandingPage from '../LandingPage/LandingPage.js'
-import Web3 from 'web3'
-import Shop from '../abis/Shop.json'
+
+
+
+
 
 const { SubMenu } = Menu;
 const { Header, Content } = Layout;
@@ -47,17 +62,17 @@ class HomePageLayout extends React.Component {
       total: 0,
       visible: false
     }
+  }
 
+  componentDidMount() {
     this.loadWeb3().then(() => {
-      this.loadBlockchainData().then(() => {
-        const itemCount = loadItemCount(this.state.account);
-        const itemInCart = loadItemInCart(this.state.account);
-        const total = loadTotal(this.state.account);
-
-        this.setState({itemCount: itemCount, itemInCart: itemInCart, total: total})
-      });
-
+      this.loadBlockchainData()
     });
+    const itemCount = loadItemCount(this.state.account);
+    const itemInCart = loadItemInCart(this.state.account);
+    const total = loadTotal(this.state.account);
+
+    this.setState({ itemCount: itemCount, itemInCart: itemInCart, total: total })
   }
 
   // Load web3
@@ -188,7 +203,7 @@ class HomePageLayout extends React.Component {
 
     if (this.state.shopContract) {
       this.setState({ confirmLoading: true });
-      this.state.shopContract.methods.createOrder(items).send({ from: this.state.account }).then(() => {
+      this.state.shopContract.methods.createOrder(items, this.state.total).send({ from: this.state.account }).then(() => {
         console.log("purchase success")
         this.setState({ confirmLoading: false });
         this.emptyCart()
@@ -200,8 +215,8 @@ class HomePageLayout extends React.Component {
 
   emptyCart() {
     storeItemCount(this.state.account, 0);
-    storeItemInCart(this.state.account,[]);
-    this.setState({ itemCount: 0, itemInCart: []});
+    storeItemInCart(this.state.account, []);
+    this.setState({ itemCount: 0, itemInCart: [] });
     this.updateTotal([])
   }
 
@@ -216,9 +231,9 @@ class HomePageLayout extends React.Component {
               <img className="logo" src={logo} alt="logo" />
             </Link>
             <Menu theme="dark" mode="horizontal" sticky="top">
-              <SubMenu key="Categories" icon={<MenuOutlined />} title="Categories">
+              <SubMenu icon={<MenuOutlined />} title="Categories">
                 {/* Appliances */}
-                <SubMenu key="appliances" title="Appliances">
+                <SubMenu title="Appliances">
                   <Menu.Item key="rf">Refrigerators & Freezers</Menu.Item>
                   <Menu.Item key="cem">Coffee & Espresso Makers</Menu.Item>
                   <Menu.Item key="ap">
@@ -226,7 +241,7 @@ class HomePageLayout extends React.Component {
                   </Menu.Item>
                 </SubMenu>
                 {/* Computers, Tablets & Accessories */}
-                <SubMenu key="cta" title="Computers, Tablets & Accessories">
+                <SubMenu title="Computers, Tablets & Accessories">
                   <Menu.Item key="td">Laptops and Desktops</Menu.Item>
                   <Menu.Item key="tie">Tablets, iPads & eReaders</Menu.Item>
                 </SubMenu>
@@ -237,9 +252,10 @@ class HomePageLayout extends React.Component {
                   <Menu.Item key="gp">Google Phones</Menu.Item>
                 </SubMenu>
               </SubMenu>
-
+              <SubMenu icon={<UserOutlined />} style={{ float: 'right', color: "white" }}>
+                <Menu.Item ><Link to="/orders">Your Orders</Link></Menu.Item>
+              </SubMenu>
               <SubMenu
-                class="shopping-cart"
                 icon={<Badge count={this.state.itemCount}><Button ghost><ShoppingCartOutlined />Shopping Cart</Button></Badge>}
                 key="2"
                 theme="light"
@@ -266,13 +282,13 @@ class HomePageLayout extends React.Component {
                   )}
                 >
                   <List.Item style={{ color: 'white' }}>
-                    <div style={{ width: 420, height: 50, "text-align": "right", "margin-right": 20 }}>
+                    <div style={{ width: 420, height: 50, "textAlign": "right", "margin-right": 20 }}>
                       <DollarCircleOutlined />
                       total: ${Math.round(this.state.total)}
                     </div>
                   </List.Item>
                 </List>
-                <div style={{ "margin-right": 20, "margin-top": 1, "margin-bottom": 10, float: "right" }}>
+                <div style={{ "margin-right": 20, "marginTop": 1, "marginBottom": 10, float: "right" }}>
                   {
                     this.state.itemCount > 0 ?
                       <>
@@ -303,7 +319,7 @@ class HomePageLayout extends React.Component {
                             )}
                           >
                             <List.Item>
-                              <div style={{ width: 420, height: 50, "text-align": "right", "margin-right": 20 }}>
+                              <div style={{ width: 420, height: 50, "textAlign": "right", "margin-right": 20 }}>
                                 <DollarCircleOutlined />
                       total: ${Math.round(this.state.total)}
                               </div>
@@ -313,8 +329,8 @@ class HomePageLayout extends React.Component {
                       </> : <Button disabled>Checkout</Button>
                   }
                 </div>
-
               </SubMenu>
+
             </Menu>
           </Header>
           <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
@@ -322,7 +338,11 @@ class HomePageLayout extends React.Component {
               <Route exact path="/"><LandingPage account={this.state.account}></LandingPage></Route>
               <Route exact path="/appliances/air-purifiers">
                 <AirPurifierPage account={this.state.account} onAddItem={this.handleAddItem}></AirPurifierPage>
-              </Route></div>
+              </Route>
+              <Route exact path="/orders"><OrderPage account={this.state.account} contract={this.state.shopContract} /></Route>
+
+            </div>
+
           </Content>
         </Router>
       </Layout >

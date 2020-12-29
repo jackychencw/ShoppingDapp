@@ -66,7 +66,7 @@ class AirPurifiersPage extends React.Component {
                                 <Meta
 
                                     title={item.name}
-                                    description={<div class="description">{"$" + item.price}</div>}
+                                    description={<div>{"$" + item.price}</div>}
                                 />
                             </Card>
                         </List.Item>
