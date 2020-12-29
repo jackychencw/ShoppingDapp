@@ -24,6 +24,7 @@ contract Shop {
       orders[order_count].items[i] = ids[i];
     }
     order_count ++;
+    emit orderCreated(order_count, ids.length, total);
   }
 
   function getOrder(uint id) public returns (uint order_id, uint item_count, address account, uint total){
@@ -33,4 +34,10 @@ contract Shop {
   function getItem(uint order_id, uint item_index) public returns (uint item_id){
     return (orders[order_id].items[item_index]);
   }
+
+  event orderCreated (
+    uint order_id,
+    uint item_count,
+    uint total
+  );
 }
