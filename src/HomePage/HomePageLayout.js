@@ -167,6 +167,7 @@ class HomePageLayout extends React.Component {
       var orders = [];
       await this.state.shopContract.methods.order_count.call().call().then(async order_count => {
         for (var i = 0; i < order_count; i++) {
+          // eslint-disable-next-line
           await this.state.shopContract.methods.getOrder(i).call().then(async order_res => {
             if (order_res.account === this.state.account) {
               var order = { "id": order_res.order_id, "total": order_res.total }

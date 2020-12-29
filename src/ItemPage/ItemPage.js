@@ -2,8 +2,8 @@ import { Card, List } from 'antd';
 import { Breadcrumb } from 'antd';
 import React from 'react';
 import './ItemPage.css';
-import { StarOutlined, PlusCircleOutlined } from '@ant-design/icons';
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { PlusCircleOutlined } from '@ant-design/icons';
+import { BrowserRouter as Link } from "react-router-dom";
 
 const { Meta } = Card;
 
