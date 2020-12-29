@@ -11,42 +11,53 @@ import Web3 from 'web3'
 import Shop from '../abis/Shop.json'
 
 const { SubMenu } = Menu;
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 
-function loadItemCount() {
-  return +localStorage.getItem("itemCount") || 0;
-}
-
-function loadItemInCart() {
-  return JSON.parse(localStorage.getItem("itemInCart") || "{}");
-}
-function loadTotal() {
-  return +localStorage.getItem("total") || 0;
-}
-function storeItemCount(itemCount) {
-  localStorage.setItem("itemCount", itemCount);
+function loadItemCount(a) {
+  return +localStorage.getItem("itemCount" + a) || 0;
 }
 
-function storeItemInCart(itemInCart) {
-  localStorage.setItem("itemInCart", JSON.stringify(itemInCart));
+function loadItemInCart(a) {
+  return JSON.parse(localStorage.getItem("itemInCart" + a) || "[]");
+}
+function loadTotal(a) {
+  return +localStorage.getItem("total" + a) || 0;
+}
+function storeItemCount(a, itemCount) {
+  localStorage.setItem("itemCount" + a, itemCount);
 }
 
-function storeTotal(total) {
-  localStorage.setItem("total", total);
+function storeItemInCart(a, itemInCart) {
+  localStorage.setItem("itemInCart" + a, JSON.stringify(itemInCart));
+}
+
+function storeTotal(a, total) {
+  localStorage.setItem("total" + a, total);
 }
 
 class HomePageLayout extends React.Component {
-  itemCount = loadItemCount();
-  itemInCart = loadItemInCart();
-  total = loadTotal();
+  constructor(props) {
+    super(props);
+    this.state = {
+      account: null,
+      shopContract: null,
+      confirmLoading: false,
+      itemCount: 0,
+      itemInCart: {},
+      total: 0,
+      visible: false
+    }
 
-  state = { 
-    shop_contract: null,
-    confirmLoading: false, 
-    visible: false, 
-    itemCount: this.itemCount, 
-    itemInCart: this.itemInCart, 
-    total: this.total 
+    this.loadWeb3().then(() => {
+      this.loadBlockchainData().then(() => {
+        const itemCount = loadItemCount(this.state.account);
+        const itemInCart = loadItemInCart(this.state.account);
+        const total = loadTotal(this.state.account);
+
+        this.setState({itemCount: itemCount, itemInCart: itemInCart, total: total})
+      });
+
+    });
   }
 
   // Load web3
@@ -78,20 +89,21 @@ class HomePageLayout extends React.Component {
     // Proceed if network exists
     if (networkData) {
       // Get contract, set state
-      const shop_contract = new web3.eth.Contract(Shop.abi, networkData.address)
-      this.setState({ shop_contract: shop_contract }, () => {
+      const shopContract = new web3.eth.Contract(Shop.abi, networkData.address)
+      this.setState({ shopContract: shopContract }, () => {
         console.log("contract ready")
       })
     }
   }
 
   updateTotal = (itemInCart) => {
+    console.log(itemInCart);
     var total = 0
     itemInCart.forEach(item => {
       total += item.price * item.amount
     })
     total = Math.round(total)
-    storeTotal(total)
+    storeTotal(this.state.account, total)
     this.setState({ total: total })
   }
 
@@ -101,9 +113,9 @@ class HomePageLayout extends React.Component {
   }
 
   remove = (item) => {
-    const itemCount = loadItemCount();
-    var itemInCart = loadItemInCart();
-
+    const itemCount = loadItemCount(this.state.account);
+    var itemInCart = loadItemInCart(this.state.account);
+    console.log(itemCount)
 
     const itemIndex = itemInCart.findIndex(function (e) {
       return e.id === item.id
@@ -112,8 +124,8 @@ class HomePageLayout extends React.Component {
     if (itemIndex >= 0) {
       var newItemCount = itemCount - item.amount
       itemInCart.splice(itemIndex, 1)
-      storeItemCount(newItemCount);
-      storeItemInCart(itemInCart);
+      storeItemCount(this.state.account, newItemCount);
+      storeItemInCart(this.state.account, itemInCart);
       this.setState({ itemCount: newItemCount, itemInCart: itemInCart });
       this.updateTotal(itemInCart)
     }
@@ -125,8 +137,8 @@ class HomePageLayout extends React.Component {
     if (value === 0) {
       this.remove(item)
     } else {
-      const itemCount = loadItemCount();
-      var itemInCart = loadItemInCart();
+      const itemCount = loadItemCount(this.state.account);
+      var itemInCart = loadItemInCart(this.state.account);
       const itemIndex = itemInCart.findIndex(function (e) {
         return e.id === item.id
       })
@@ -134,8 +146,8 @@ class HomePageLayout extends React.Component {
         var newItemCount = itemCount + value - item.amount
         itemInCart[itemIndex]["amount"] = value
         this.updateTotal(itemInCart)
-        storeItemCount(newItemCount);
-        storeItemInCart(itemInCart);
+        storeItemCount(this.state.account, newItemCount);
+        storeItemInCart(this.state.account, itemInCart);
         this.setState({ itemCount: newItemCount, itemInCart: itemInCart });
       }
     }
@@ -174,17 +186,23 @@ class HomePageLayout extends React.Component {
       }
     })
 
-    // this.emptyCart()
-    // this.success()
+    if (this.state.shopContract) {
+      this.setState({ confirmLoading: true });
+      this.state.shopContract.methods.createOrder(items).send({ from: this.state.account }).then(() => {
+        console.log("purchase success")
+        this.setState({ confirmLoading: false });
+        this.emptyCart()
+        this.success()
+      });
+    }
+    this.setState({ confirmLoading: false });
   }
 
   emptyCart() {
-    const newItemCount = 0;
-    const newItemInCart = [];
-    storeItemCount(newItemCount);
-    storeItemInCart(newItemInCart);
-    this.setState({ itemCount: newItemCount, itemInCart: newItemInCart });
-    this.updateTotal(newItemInCart)
+    storeItemCount(this.state.account, 0);
+    storeItemInCart(this.state.account,[]);
+    this.setState({ itemCount: 0, itemInCart: []});
+    this.updateTotal([])
   }
 
 
@@ -301,8 +319,10 @@ class HomePageLayout extends React.Component {
           </Header>
           <Content className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
             <div>
-              <Route exact path="/" component={LandingPage}></Route>
-              <Route exact path="/appliances/air-purifiers"><AirPurifierPage onAddItem={this.handleAddItem}></AirPurifierPage></Route></div>
+              <Route exact path="/"><LandingPage account={this.state.account}></LandingPage></Route>
+              <Route exact path="/appliances/air-purifiers">
+                <AirPurifierPage account={this.state.account} onAddItem={this.handleAddItem}></AirPurifierPage>
+              </Route></div>
           </Content>
         </Router>
       </Layout >

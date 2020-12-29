@@ -35,7 +35,7 @@ class LandingPage extends React.Component {
     render() {
         return (
             <div className='App'>
-                <h1 style={greetingStyle}>{ `Good  ${this.state.time}! Welcome to Ethershop!`}</h1>
+                <h1 style={greetingStyle}>{`Good  ${this.state.time}! Welcome to Ethershop!`}<br/>{ `Your address: ${this.props.account}`} </h1>
             </div>
 
         )

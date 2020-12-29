@@ -7,25 +7,30 @@ import { StarOutlined, PlusCircleOutlined } from '@ant-design/icons';
 const { Meta } = Card;
 
 class AirPurifiersPage extends React.Component {
-    data = require('./data.json')
+    constructor(props){
+        super(props);
+        this.data = require('./data.json')
+    }
+    
 
     add(item) {
-        const itemCount = +localStorage.getItem("itemCount") || 0;
+        const itemCount = +localStorage.getItem("itemCount" + this.props.account) || 0;
         var newItemCount = itemCount + 1
-        var itemInCart = JSON.parse(localStorage.getItem("itemInCart") || "[]");
-        const itemIndex = itemInCart.findIndex(function(e) {
-            return e.id === item.id
-        })
+        // var itemInCart = [];
+        var itemInCart = JSON.parse(localStorage.getItem("itemInCart" + this.props.account) || "[]");
 
-        if (itemIndex >= 0){
-            itemInCart[itemIndex].amount += 1
-        } else {
+        console.log(itemInCart)
+        var f;
+        var found = itemInCart.some(function(e, index) { f = index; return e.id === item.id; });
+
+        if (!found) {
             item["amount"] = 1
             itemInCart.push(item)
+        } else {
+            itemInCart[f].amount += 1
         }
-
-        localStorage.setItem("itemCount", newItemCount);
-        localStorage.setItem("itemInCart", JSON.stringify(itemInCart))
+        localStorage.setItem("itemCount" + this.props.account, newItemCount);
+        localStorage.setItem("itemInCart" + this.props.account, JSON.stringify(itemInCart))
 
         this.props.onAddItem(newItemCount, itemInCart);
 
