@@ -12,20 +12,34 @@ This is a decentralized e-commerce application, it includes the basic functions 
 
 Please open a terminal at the folder of this project, make sure you have installed npm, nodejs, truffle, lite-server, Ganache and Metamask.
 
-Ganache 2.5.4 for Win Users: https://www.trufflesuite.com/ganache
-Metamask:
-Chrome:https://metamask.io/download.html
-Fire Fox: https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/
 NodeJS: https://nodejs.org/en/download/
+
+Ganache 2.5.4 for Win Users: https://www.trufflesuite.com/ganache
+
+Metamask:
+
+Chrome:https://metamask.io/download.html
+
+Fire Fox: https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/
 
 ## Setup Ganache and MetaMask
 
 1. Create a Workspace
 
-![home](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/ganache-home-empty.png)
+![Home](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/ganache-home-empty.png)
 
 2. Main Interface
-   ![interface](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/ganache-accounts.png)
+   ![Interface](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/ganache-accounts.png)
+
+3. Setup MetaMask
+   Now you can start setting up MetaMask, instead of create password, click **Import with seed phrase**
+   ![Create Account](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/metamask-create-password.png)
+4. Find MNEMONIC from Ganache
+   ![Mnemonic](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/mnemonic.png)
+5. Use the Mnemonic you just fond as seed phrase
+   ![Import](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/metamask_import_account.png)
+6. Now you should see MetaMask Main page, and you should see Ethereum Mainnet on your top right corner
+   ![main](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/metamask_main.png)
 
 # Setup Server
 
