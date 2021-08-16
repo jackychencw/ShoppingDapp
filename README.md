@@ -54,6 +54,7 @@ Fire Fox: https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/
    ![main](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/metamask_main.png)
 
 8. Switch Ethereum Net
+
    Select **Custom RPC** from top right cornet
    ![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/custom_rpc_tab.png)
 
@@ -105,6 +106,9 @@ or
 yarn start
 ```
 
-# Use the app
+# About the App
 
-Once the program starts, you can start browsing items and make purchase, or you can review your previous orders.
+Once the program starts, it will ask you to connect to your metamask.
+Make sure you are not on the main net but Ganache Net, then you can start browsing items and make purchase, or you can review your previous orders.
+![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/website_index.png)
+![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/website_transaction.png)
