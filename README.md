@@ -31,15 +31,39 @@ Fire Fox: https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/
 2. Main Interface
    ![Interface](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/ganache-accounts.png)
 
-3. Setup MetaMask
+3. Import Project
+   Click settings icon on the top right corner
+   ![Interface](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/settings-icon.png)
+
+   Now select workspace, and click add project
+   ![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/workspaces-pane-tab.png)
+
+   Select **truffle-config.js** in this project's root folder
+   ![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/truffle_config.png)
+
+   Then you should have successfully imported the application contract.
+
+4. Setup MetaMask
    Now you can start setting up MetaMask, instead of create password, click **Import with seed phrase**
    ![Create Account](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/metamask-create-password.png)
-4. Find MNEMONIC from Ganache
+5. Find MNEMONIC from Ganache
    ![Mnemonic](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/mnemonic.png)
-5. Use the Mnemonic you just fond as seed phrase
+6. Use the Mnemonic you just fond as seed phrase
    ![Import](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/metamask_import_account.png)
-6. Now you should see MetaMask Main page, and you should see Ethereum Mainnet on your top right corner
+7. Now you should see MetaMask Main page, and you should see Ethereum Mainnet on your top right corner
    ![main](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/metamask_main.png)
+
+8. Switch Ethereum Net
+   Select **Custom RPC** from top right cornet
+   ![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/custom_rpc_tab.png)
+
+   Enter the info below
+   ![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/network_info.png)
+
+9. After changing Network, you should see 100 ETH appear in you account, this can be used for development purpose
+   ![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/test_eth.png)
+
+Now you have successfully set up Ganache and Metamask
 
 # Setup Server
 
@@ -65,6 +89,9 @@ truffle compile
 
 truffle migrate
 ```
+
+After successful compile/migrate you should see your account balance changed, this means you have successfully published your application on the blockchain.
+![img](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/success_migrate.png)
 
 # Start app
 
