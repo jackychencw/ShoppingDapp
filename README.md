@@ -17,6 +17,13 @@ Please open a terminal at the folder of this project, make sure you have install
 
 ## Setup Ganache
 
+1. Create a Workspace
+
+![home](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/ganache-home-empty.png)
+
+2. Main Interface
+   ![interface](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/ganache-accounts.png)
+
 # Setup
 
 ### Install npm packages
