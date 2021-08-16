@@ -12,7 +12,7 @@ This is a decentralized e-commerce application, it includes the basic functions 
 
 Please open a terminal at the folder of this project, make sure you have installed npm, nodejs, truffle, lite-server, Ganache and Metamask.
 
-NodeJS: https://nodejs.org/en/download/
+NodeJS: https://nodejs.org/en/blog/release/v12.18.2/
 
 Ganache 2.5.4 for Win Users: https://www.trufflesuite.com/ganache
 
@@ -79,7 +79,7 @@ You will need truffle for this project, Truffle is a famous blockchain framework
 To install, simply run
 
 ```
-npm install -g truffle
+npm i truffle@5.1.59
 ```
 
 ### Compile and migrate contract
