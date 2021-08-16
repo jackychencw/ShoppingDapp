@@ -12,10 +12,13 @@ This is a decentralized e-commerce application, it includes the basic functions 
 
 Please open a terminal at the folder of this project, make sure you have installed npm, nodejs, truffle, lite-server, Ganache and Metamask.
 
-[link to Ganache 2.5.4 for windows](https://www.trufflesuite.com/ganache)
-[Link to Metamask](https://metamask.io/download.html), You can simply add as chrome extension
+Ganache 2.5.4 for Win Users: https://www.trufflesuite.com/ganache
+Metamask:
+Chrome:https://metamask.io/download.html
+Fire Fox: https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/
+NodeJS: https://nodejs.org/en/download/
 
-## Setup Ganache
+## Setup Ganache and MetaMask
 
 1. Create a Workspace
 
@@ -24,7 +27,7 @@ Please open a terminal at the folder of this project, make sure you have install
 2. Main Interface
    ![interface](https://raw.githubusercontent.com/jackychencw/ethershop/main/imgs/ganache-accounts.png)
 
-# Setup
+# Setup Server
 
 ### Install npm packages
 
